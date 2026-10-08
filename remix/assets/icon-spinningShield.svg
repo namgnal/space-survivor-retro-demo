@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-labelledby="title description">
+  <title id="title">旋转护盾</title>
+  <desc id="description">围绕玩家运动的攻击盾；以环绕箭头区别于护盾药水和圣骑士职业。</desc>
+  <defs>
+    <g id="glyph" fill="none">
+      <path d="M10 24 C13 7 40 5 53 20 M52 10 L53 20 L43 19"/><path fill="#eee6ce" d="M19 25 L32 20 L46 25 L44 39 Q42 48 32 54 Q20 47 20 38 Z"/>
+    </g>
+  </defs>
+  <g stroke-linecap="round" stroke-linejoin="round">
+    <use href="#glyph" stroke="#eee6ce" stroke-width="8" aria-hidden="true" data-layer="paper-edge"/>
+    <use href="#glyph" stroke="#292d28" stroke-width="4" data-layer="ink"/>
+  </g>
+</svg>

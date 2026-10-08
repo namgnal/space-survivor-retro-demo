@@ -1,0 +1,45 @@
+
+[hidden],.hidden{display:none!important}
+body{font-family:"Microsoft YaHei",sans-serif!important}
+button,select,input{font:inherit}
+button{cursor:pointer}button:disabled{opacity:.5;cursor:wait}
+button:focus-visible,[role=button]:focus-visible,select:focus-visible{outline:3px solid #dcbb72;outline-offset:4px}
+#trial-bar{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);z-index:70;display:flex;align-items:center;gap:8px;white-space:nowrap;padding:8px 10px;border:1px solid #aaa38b60;border-radius:12px;background:#f4eddddF;box-shadow:0 5px 24px #151b1422;color:#474b3b;font-size:12px;backdrop-filter:blur(14px)}
+#trial-bar button,#trial-bar select{background:#ffffff55;border:1px solid #b6ad9655;padding:6px 9px;border-radius:7px;color:inherit}
+#trial-bar button:hover{background:#fff9ec}
+#trial-bar label{display:flex;gap:6px;align-items:center}
+#trial-bar input{width:65px;accent-color:#697450}
+.trial-label{font-size:10px;letter-spacing:.12em;margin:0 5px;color:#858571}
+#trial-note{position:fixed;right:18px;bottom:2px;z-index:71;font-size:10px;color:#eee3c399;pointer-events:none;letter-spacing:.04em}
+#movement-hint{position:fixed;bottom:81px;left:50%;transform:translateX(-50%);max-width:95vw;z-index:69;white-space:nowrap;padding:6px 12px;border-radius:8px;background:#293022cb;color:#eee7d2;font-size:12px;pointer-events:none}
+#menu-screen{padding-bottom:70px}
+.menu-hero{width:100px;height:138px;object-fit:contain;margin-bottom:23px;filter:drop-shadow(0 12px 7px #181d1830)}
+#menu-screen>p{margin-bottom:30px}
+#menu-screen>h1{font-family:STKaiti,KaiTi,serif;font-size:54px;letter-spacing:.07em}
+body[data-art=on] #menu-screen{background:radial-gradient(ellipse at 50% 36%,#e7dec4eF,#d8d2bdeF 58%,#bbc1a4f0),url('assets/woodland.png') center/cover}
+body[data-art=on] #menu-screen>h1{color:#394536;background:none;text-shadow:0 2px #faf3df;font-weight:700}
+body[data-art=on] #menu-screen>p{color:#626957}
+body[data-art=on] #menu-screen>p span{color:#7d826d}
+body[data-art=on] #start-btn{background:#576548;color:#fff4dd;border:1px solid #39462e;border-radius:8px 11px 7px 12px;box-shadow:0 6px 0 #39442f,0 14px 24px #39462e22;font-size:19px;padding:16px 50px;letter-spacing:.13em}
+body[data-art=on] #start-btn:hover{background:#667652;transform:translateY(-1px)}
+body[data-art=on] #hud{color:#fbf0d5;text-shadow:0 1px 3px #242b20}
+body[data-art=on] #hud .bg-gray-800{background:#383f30bc;border-color:#c6c1a977}
+body[data-art=on] #xp-bar{background:#ddca8d}
+body[data-art=on] #hp-bar{background:#a6bc80}
+#level-up-modal,#pause-modal{padding-bottom:92px;overflow-y:auto}
+body[data-art=on] #level-up-modal,body[data-art=on] #pause-modal{background:#28311fec;backdrop-filter:blur(5px)}
+body[data-art=on] #level-up-modal>h2,body[data-art=on] #pause-modal>h2{font:32px STKaiti,KaiTi,serif;color:#f0e4c6;letter-spacing:.12em}
+body[data-art=on] #level-up-modal>div:first-child,body[data-art=on] #pause-modal>div{background:#e7ddc7;color:#484d3d;border-color:#b9ad92;border-radius:8px 12px 6px 10px}
+body[data-art=on] #levelup-weapons-list>div,body[data-art=on] #levelup-passives-list>div,body[data-art=on] #pause-weapons>div,body[data-art=on] #pause-passives>div{background:#f7efdd;border-color:#cdc3ab;color:#48513e}
+body[data-art=on] #levelup-weapons-list span,body[data-art=on] #levelup-passives-list span,body[data-art=on] #pause-weapons span,body[data-art=on] #pause-passives span{color:inherit}
+body[data-art=on] #upgrade-options>div{position:relative;background:#f3ead7;border:1px solid #b9ad8c;color:#3c4435;border-radius:7px 11px 6px 9px;padding:15px 17px;min-height:68px;box-shadow:0 3px 0 #151d1644}
+body[data-art=on] #upgrade-options>div:hover{background:#fff6e2;transform:translateY(-2px)}
+body[data-art=on] #upgrade-options h3{color:#3c4435}body[data-art=on] #upgrade-options p{color:#798066}
+body[data-art=on] #upgrade-options span{color:#777655;background:#ded5bf}
+.choice-icon{width:38px;height:38px;float:left;margin:0 14px 0 0}
+body[data-art=off] .choice-icon{display:none}
+body[data-art=on] #resume-btn,body[data-art=on] #reroll-btn{background:#697452;border:1px solid #9d9d7c;color:#fff2d5}
+body[data-art=on] #game-over-screen{background:#28311feb}body[data-art=on] #game-over-screen>h1{font:52px STKaiti,KaiTi,serif;color:#d2a396}
+#warning-msg{font-size:36px}
+@media(max-width:620px){#trial-bar{bottom:13px;gap:4px;padding:7px;font-size:11px;width:max-content;max-width:98vw}.trial-label,.volume-label{display:none!important}#trial-note{display:none}#menu-screen>h1{font-size:40px}.menu-hero{width:80px;height:110px;margin-bottom:20px}#hud>.absolute.top-4.left-4{width:92px}#hud>.w-1\/2{width:33%}#timer{font-size:18px;margin-right:4px}#level-up-modal{justify-content:flex-start;padding-top:14px}#level-up-modal>h2{font-size:26px;margin-bottom:12px}#upgrade-options>div{padding:11px 12px!important;min-height:57px!important}#warning-msg{font-size:25px}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}

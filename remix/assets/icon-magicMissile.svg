@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-labelledby="title description">
+  <title id="title">魔法飞弹</title>
+  <desc id="description">用圆头弹核表示魔法飞弹的直线弹体；加特林是该武器进化名，本批不另造枪形图标。</desc>
+  <defs>
+    <g id="glyph" fill="none">
+      <path fill="#eee6ce" d="M27 20 C42 16 54 22 55 32 C54 43 41 48 27 44 L19 32 Z"/><path d="M7 24 L14 24 M5 32 L12 32 M7 41 L14 41"/>
+    </g>
+  </defs>
+  <g stroke-linecap="round" stroke-linejoin="round">
+    <use href="#glyph" stroke="#eee6ce" stroke-width="8" aria-hidden="true" data-layer="paper-edge"/>
+    <use href="#glyph" stroke="#292d28" stroke-width="4" data-layer="ink"/>
+  </g>
+</svg>

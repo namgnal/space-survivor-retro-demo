@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-labelledby="title description">
+  <title id="title">定时炸弹</title>
+  <desc id="description">表示放置后延迟引爆；只画实体身份，不把爆炸半径、倒计时烘焙进图标。</desc>
+  <defs>
+    <g id="glyph" fill="none">
+      <path fill="#eee6ce" d="M26 20 L27 13 L37 13 L38 20 Z"/><path d="M33 12 Q33 6 44 8"/><path fill="#eee6ce" d="M49 37 C49 48 41 55 31 55 C20 55 13 47 14 36 C14 25 22 20 32 20 C43 20 49 27 49 37 Z"/>
+    </g>
+  </defs>
+  <g stroke-linecap="round" stroke-linejoin="round">
+    <use href="#glyph" stroke="#eee6ce" stroke-width="8" aria-hidden="true" data-layer="paper-edge"/>
+    <use href="#glyph" stroke="#292d28" stroke-width="4" data-layer="ink"/>
+  </g>
+</svg>

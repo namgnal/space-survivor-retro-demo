@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>太空幸存者古早demo · 美术音效版</title><link rel="icon" href="data:,">
+    <link rel="stylesheet" href="vendor/tailwind.css"><link rel="stylesheet" href="remix.css">
+    <style>
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            overscroll-behavior: none; touch-action: none; user-select: none; background-color: #000;
+        }
+        canvas { display: block; background-color: #111827; width: 100%; height: 100%; }
+        #game-container { position: fixed; inset: 0; overflow: hidden; }
+        .evo-text { animation: pulse 1s infinite; text-shadow: 0 0 10px rgba(239, 68, 68, 0.8); color: #fbbf24; }
+        .omen-text { animation: pulseCyan 1.5s infinite; color: #22d3ee; text-shadow: 0 0 10px #0891b2; }
+        .warning-text { animation: flashRed 0.5s infinite; color: #ef4444; text-shadow: 0 0 20px red; }
+
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+        @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.05); } 100% { transform: scale(1); } }
+        @keyframes pulseCyan { 0% { opacity: 0.8; } 50% { opacity: 1; text-shadow: 0 0 20px #22d3ee; } 100% { opacity: 0.8; } }
+        @keyframes flashRed { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+    </style>
+</head>
+<body data-art="on" class="bg-gray-900 text-white overflow-hidden">
+
+    <nav id="trial-bar" aria-label="融合试验设置">
+<span class="trial-label">古早 demo</span>
+<button id="art-toggle" aria-pressed="true">美术：融合</button>
+<label class="scene-label">场地<select id="scene"><option value="woodland">疏林</option><option value="road">旧道</option></select></label>
+<button id="sound-toggle" aria-pressed="true">声音：开启</button>
+<label class="volume-label">音量<input id="volume" type="range" min="0" max="100" value="65" aria-label="总音量"></label>
+</nav><div id="movement-hint" hidden></div><div id="trial-note">太空幸存者古早demo · 美术音效版</div>
+<div id="game-container">
+        <canvas id="game-canvas"></canvas>
+
+        <div id="warning-banner" class="absolute top-1/4 left-0 w-full text-center pointer-events-none hidden z-50">
+            <h1 class="text-6xl font-black warning-text tracking-tighter" id="warning-msg">⚠️ 虫群来袭 ⚠️</h1>
+        </div>
+
+        <div id="hud" class="absolute top-0 left-0 w-full p-4 z-10 hidden pointer-events-none">
+            <div class="absolute top-4 right-4 pointer-events-auto flex gap-2">
+                <div class="text-2xl font-bold drop-shadow-md font-mono self-center mr-4" id="timer">00:00</div>
+
+                <button id="pause-btn" class="bg-gray-800 bg-opacity-50 rounded-full w-10 h-10 flex items-center justify-center border border-gray-600 active:scale-95 transition">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 5.25v13.5m-7.5-13.5v13.5" />
+                    </svg>
+                </button>
+            </div>
+
+            <div class="w-1/2 max-w-sm mx-auto pointer-events-auto">
+                <div class="text-center mb-1 text-shadow"><span class="font-bold text-yellow-400">LV <span id="player-level">1</span></span></div>
+                <div class="w-full bg-gray-800 rounded-full h-3 border border-gray-600 overflow-hidden">
+                    <div id="xp-bar" class="bg-gradient-to-r from-blue-400 to-blue-600 h-full transition-all duration-200" style="width: 0%"></div>
+                </div>
+            </div>
+
+            <div class="absolute top-4 left-4 w-32">
+                <div class="text-sm font-bold mb-1">HP</div>
+                <div class="w-full bg-gray-800 rounded-full h-4 border border-gray-600 overflow-hidden relative">
+                    <div id="hp-bar" class="bg-gradient-to-r from-green-500 to-green-400 h-full transition-all duration-200" style="width: 100%"></div>
+                    <span id="hp-text" class="absolute inset-0 text-xs flex items-center justify-center font-bold text-white drop-shadow-md">100/100</span>
+                </div>
+            </div>
+        </div>
+
+        <div id="menu-screen" class="absolute inset-0 bg-gray-900 bg-opacity-95 flex flex-col justify-center items-center z-20">
+            <img class="menu-hero" src="assets/hero.png" alt="红围巾旅人"><h1 class="text-5xl font-extrabold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-600">太空幸存者</h1>
+            <p class="text-gray-400 mb-12 text-base max-w-md text-center px-4 leading-relaxed font-light tracking-wide">
+                早期无尽玩法 · 新美术与新声音<br><br>
+                <span class="text-gray-600 text-sm">长按左键 1.2 秒开启鼠标跟随 · 左击停止<br>WASD / 方向键，或触屏拖动也可移动</span>
+            </p>
+            <button id="start-btn" disabled class="px-12 py-5 bg-blue-600 hover:bg-blue-500 rounded-xl text-2xl font-bold shadow-lg shadow-blue-900/50 transform transition active:scale-95 tracking-wider">
+                素材载入中…
+            </button>
+        </div>
+
+        <div id="pause-modal" class="absolute inset-0 bg-black bg-opacity-80 backdrop-blur-sm flex flex-col justify-center items-center z-40 hidden p-6">
+            <h2 class="text-3xl font-bold mb-6 text-white tracking-widest">稍作停留</h2>
+            <div class="bg-gray-800 rounded-xl p-6 max-w-md w-full border border-gray-700 shadow-2xl">
+                <h3 class="text-yellow-400 font-bold mb-4 border-b border-gray-700 pb-2">当前武装</h3>
+                <div id="pause-weapons" class="grid grid-cols-1 gap-2 mb-6 max-h-40 overflow-y-auto no-scrollbar"></div>
+                <h3 class="text-blue-400 font-bold mb-4 border-b border-gray-700 pb-2">被动技能</h3>
+                <div id="pause-passives" class="grid grid-cols-2 gap-2 max-h-40 overflow-y-auto no-scrollbar"></div>
+            </div>
+            <button id="resume-btn" class="mt-8 px-10 py-3 bg-green-600 hover:bg-green-500 rounded-lg text-xl font-bold shadow-lg transition">继续战斗</button>
+        </div>
+
+        <div id="level-up-modal" class="absolute inset-0 bg-black bg-opacity-80 backdrop-blur-sm flex flex-col justify-center items-center z-30 hidden p-4">
+            <div class="w-full max-w-lg bg-gray-900 border border-gray-700 rounded-lg p-3 mb-4 shadow-lg">
+                <div class="flex text-xs text-gray-400 mb-2 border-b border-gray-800 pb-1">
+                    <span class="w-1/2 text-center font-bold text-red-400">武器</span>
+                    <span class="w-1/2 text-center font-bold text-blue-400">被动</span>
+                </div>
+                <div class="flex h-20 gap-2">
+                    <div id="levelup-weapons-list" class="w-1/2 flex flex-col gap-1 overflow-y-auto no-scrollbar text-xs"></div>
+                    <div class="w-[1px] bg-gray-800"></div>
+                    <div id="levelup-passives-list" class="w-1/2 flex flex-col gap-1 overflow-y-auto no-scrollbar text-xs"></div>
+                </div>
+            </div>
+
+            <h2 class="text-4xl font-bold mb-4 text-yellow-400 drop-shadow-lg">选择成长</h2>
+            <div id="upgrade-options" class="w-full max-w-lg space-y-3"></div>
+            <div id="reroll-container" class="mt-4">
+                <button id="reroll-btn" class="px-6 py-3 bg-gray-700 border border-gray-500 hover:bg-gray-600 rounded-lg font-bold text-sm transition flex items-center gap-2 text-white">
+                    <span>🎲 重选</span><span id="reroll-count" class="bg-yellow-500 text-black px-2 rounded text-xs">1</span>
+                </button>
+            </div>
+        </div>
+
+        <div id="game-over-screen" class="absolute inset-0 bg-black bg-opacity-90 flex flex-col justify-center items-center z-20 hidden">
+            <h1 class="text-6xl font-bold mb-4 text-red-500">失败</h1>
+            <p class="text-2xl mb-2 text-gray-300">存活: <span id="final-time" class="text-white">00:00</span></p>
+            <p class="text-xl mb-8 text-gray-400">等级: <span id="final-level" class="text-white">1</span></p>
+            <button id="restart-btn" class="px-8 py-3 bg-white text-black hover:bg-gray-200 rounded-lg text-xl font-bold shadow-lg transition">再试一次</button>
+        </div>
+    </div>
+
+    <script type="module" src="game.js"></script>
+<noscript>请启用 JavaScript 运行试玩。</noscript></body>
+</html>

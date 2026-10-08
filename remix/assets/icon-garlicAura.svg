@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-labelledby="title description">
+  <title id="title">大蒜光环</title>
+  <desc id="description">保留大蒜身份和周身持续范围语义；装饰弧不是实际攻击边界。</desc>
+  <defs>
+    <g id="glyph" fill="none">
+      <path d="M11 26 Q3 39 12 49 M54 26 Q61 40 53 49"/><path fill="#eee6ce" d="M28 21 L28 10 L36 9 L35 21 C52 30 53 48 34 53 C17 55 9 40 20 29 Z"/><path d="M31 26 Q23 40 30 49"/>
+    </g>
+  </defs>
+  <g stroke-linecap="round" stroke-linejoin="round">
+    <use href="#glyph" stroke="#eee6ce" stroke-width="8" aria-hidden="true" data-layer="paper-edge"/>
+    <use href="#glyph" stroke="#292d28" stroke-width="4" data-layer="ink"/>
+  </g>
+</svg>

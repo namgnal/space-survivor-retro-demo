@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-labelledby="title description">
+  <title id="title">断后圣枪</title>
+  <desc id="description">正式名称为断后圣枪；左向单束表示向移动反方向发射，区别飞弹与轨道炮。</desc>
+  <defs>
+    <g id="glyph" fill="none">
+      <path fill="#eee6ce" d="M40 24 L51 19 L56 31 L51 44 L40 40 Z"/><path d="M39 32 L8 32 M18 23 L8 32 L18 41"/>
+    </g>
+  </defs>
+  <g stroke-linecap="round" stroke-linejoin="round">
+    <use href="#glyph" stroke="#eee6ce" stroke-width="8" aria-hidden="true" data-layer="paper-edge"/>
+    <use href="#glyph" stroke="#292d28" stroke-width="4" data-layer="ink"/>
+  </g>
+</svg>
